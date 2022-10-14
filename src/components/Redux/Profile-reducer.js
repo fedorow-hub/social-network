@@ -1,7 +1,15 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXTAREA = 'UPDATE-TEXTAREA';
 
-const profileReducer = (state, action) => {
+let initialState = {
+    Posts: [
+        {id: 1, message: 'Hi there'},
+        {id: 2, message: 'Hi i am fine'}
+    ],
+    newPostText: 'New post text'
+}
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let post = {
