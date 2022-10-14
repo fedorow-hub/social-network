@@ -1,5 +1,6 @@
 import s from './Content.module.css';
-import Posts from "./Posts/Posts";
+
+import PostsContainer from "./Posts/PostsContainer";
 
 const Content = (props) => {
     return (
@@ -7,7 +8,7 @@ const Content = (props) => {
             <div>
                 ava + descriptions
             </div>
-            <Posts profilePage={props.profilePage} dispatch={props.dispatch} />
+            <PostsContainer store={props.store} />
         </div>
     );
 }

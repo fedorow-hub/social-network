@@ -2,7 +2,7 @@ import './App.css';
 import Content from './components/Content/Content';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import Dialogs from "./components/Dialogs/Dialogs";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {Route, Routes} from "react-router-dom";
 
 
@@ -12,10 +12,8 @@ function App(props) {
             <Header/>
             <Sidebar/>
             <Routes>
-                <Route path='/messages/*' element={<Dialogs state={props.state.dialogPage}
-                                                            dispatch={props.dispatch}/>}/>
-                <Route path='/profile/*' element={<Content profilePage={props.state.profilePage}
-                                                           dispatch={props.dispatch} />}/>
+                <Route path='/messages/*' element={<DialogsContainer store={props.store}/>}/>
+                <Route path='/profile/*' element={<Content store={props.store} />}/>
             </Routes>
 
         </div>

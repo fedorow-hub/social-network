@@ -8,11 +8,12 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let renderEntireTree = (state) => {
+let renderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} dispatch={store.dispatch.bind(store)}/>
+                <App store={store}/>
+                {/*<App state={state} dispatch={store.dispatch.bind(store)} store={store}/>*/}
             </BrowserRouter>
         </React.StrictMode>
     );

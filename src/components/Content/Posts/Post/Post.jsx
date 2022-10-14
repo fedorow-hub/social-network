@@ -6,7 +6,6 @@ const Post = (props) => {
             <div>
                 {props.message}
             </div>
-            
         </div>
     );
 }
