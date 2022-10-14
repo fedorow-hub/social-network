@@ -1,0 +1,9 @@
+.sidebar {
+    grid-area: s;
+    background-color: red;
+  }
+
+.link a {
+    color: white;
+    text-decoration: none;
+}

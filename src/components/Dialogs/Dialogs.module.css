@@ -1,0 +1,13 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 3fr 10fr;
+}
+
+.dialogItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+
+}
