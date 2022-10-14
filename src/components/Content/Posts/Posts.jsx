@@ -13,7 +13,7 @@ const Posts = (props) => {
         props.updateNewPostText(text);
     }
 
-    let MessageElements = props.state.Posts
+    let MessageElements = props.profilePage.Posts
         .map(message => <Post message ={message.message}/>)
 
     return (
@@ -21,7 +21,7 @@ const Posts = (props) => {
             <header>
                 <h3>My posts</h3>
             </header>
-            <textarea onChange={updateNewPostText} value={props.state.newPostText} ref={newPostElement}/>
+            <textarea onChange={updateNewPostText} value={props.profilePage.newPostText} ref={newPostElement}/>
             <button onClick={addPost}>Add post</button>
             {MessageElements}
         </div>
