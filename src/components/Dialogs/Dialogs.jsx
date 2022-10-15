@@ -4,10 +4,10 @@ import Message from "./Messages/Messages";
 
 const Dialogs = (props) => {
     let DialogElements = props.dialogPage.DialogsData
-        .map(dialog => <DialogItem name = {dialog.name} id = {dialog.id}/>)
+        .map(dialog => <DialogItem key={dialog.id} name = {dialog.name} id = {dialog.id}/>)
 
     let MessageElements = props.dialogPage.Messages
-        .map(message => <Message message ={message.message}/>)
+        .map(message => <Message key={message.id} message ={message.message}/>)
 
     const changeMessageBody = (e) => {
         let body = e.target.value;

@@ -3,19 +3,6 @@ import {addPostActionCreator, updateTextareaActionCreator} from "../../Redux/Pro
 import Posts from "./Posts";
 import {connect} from "react-redux";
 
-/*const PostsContainer = (props) => {
-    let state = props.store.getState().profilePage;
-    let addPost = () => {
-        props.store.dispatch(addPostActionCreator());
-    }
-
-    let updateNewPostText =(text)=> {
-        props.store.dispatch(updateTextareaActionCreator(text));
-    }
-
-    return <Posts state={state} updateNewPostText={updateNewPostText} addPost={addPost}/>;
-}*/
-
 let mapStateToProps = (state) => {
     return{
         profilePage: state.profilePage

@@ -10,6 +10,9 @@ const Sidebar = () => {
                 <NavLink to='/messages'>Messages</NavLink>
             </div>
             <div className={s.link}>
+                <NavLink to='/users'>Users</NavLink>
+            </div>
+            <div className={s.link}>
                 <a href='#'>News</a>
             </div>
             <div className={s.link}>

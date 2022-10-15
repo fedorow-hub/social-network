@@ -4,18 +4,19 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {Route, Routes} from "react-router-dom";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
-function App(props) {
+function App() {
     return (
         <div className="wrapper">
             <Header/>
             <Sidebar/>
             <Routes>
-                <Route path='/messages/*' element={<DialogsContainer store={props.store}/>}/>
-                <Route path='/profile/*' element={<Content store={props.store} />}/>
+                <Route path='/messages/*' element={<DialogsContainer />}/>
+                <Route path='/profile/*' element={<Content  />}/>
+                <Route path='/users/*' element={<UsersContainer />}/>
             </Routes>
-
         </div>
     );
 }

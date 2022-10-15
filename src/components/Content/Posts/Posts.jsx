@@ -14,7 +14,7 @@ const Posts = (props) => {
     }
 
     let MessageElements = props.profilePage.Posts
-        .map(message => <Post message ={message.message}/>)
+        .map(message => <Post key={message.id} message ={message.message}/>)
 
     return (
         <div className={s.sidebar}>
