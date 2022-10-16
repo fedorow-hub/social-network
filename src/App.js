@@ -14,7 +14,8 @@ function App() {
             <Sidebar/>
             <Routes>
                 <Route path='/messages/*' element={<DialogsContainer />}/>
-                <Route path='/profile/*' element={<Content  />}/>
+                <Route path='/profile/*' element={<Content />}/>
+                <Route path='/profile/:id' element={<Content />}/>
                 <Route path='/users/*' element={<UsersContainer />}/>
             </Routes>
         </div>

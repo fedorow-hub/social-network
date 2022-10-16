@@ -7,7 +7,6 @@ let Profile = (props) => {
             <div><Preloader/></div>
             )
     }
-    debugger
     return (
         <div>
             <img src={props.userProfile.photos.small} alt='image'/>

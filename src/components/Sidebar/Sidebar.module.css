@@ -3,7 +3,14 @@
     background-color: red;
   }
 
-.link a {
+.link {
     color: white;
     text-decoration: none;
 }
+
+.active {
+    color: gold;
+    text-decoration: none;
+}
+
+
