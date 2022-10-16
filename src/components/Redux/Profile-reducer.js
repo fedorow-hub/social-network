@@ -1,12 +1,14 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXTAREA = 'UPDATE-TEXTAREA';
+const SET_PROFILE_USER = 'SET-PROFILE-USER';
 
 let initialState = {
     Posts: [
         {id: 1, message: 'Hi there'},
         {id: 2, message: 'Hi i am fine'}
     ],
-    newPostText: 'New post text'
+    newPostText: 'New post text',
+    userProfile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -26,6 +28,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.newText
             }
+        case SET_PROFILE_USER:
+            return {
+                ...state,
+                userProfile: action.profile
+            }
         default:
             return state;
     }
@@ -33,5 +40,6 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const updateTextareaActionCreator = (text) => ({ type: UPDATE_TEXTAREA, newText: text })
+export const setProfileUser = (profile) => ({ type: SET_PROFILE_USER, profile })
 
 export default profileReducer;
