@@ -3,7 +3,7 @@ import {
     following,
     setCurrentPage,
     setTotalUsers,
-    setUsers,
+    setUsers, toggleFollowInProgress,
     toggleIsFetching,
     unfollow
 } from "../Redux/Users-reducer";
@@ -37,13 +37,16 @@ class UsersAPI extends React.Component {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users onPageChanged={this.onPageChanged}
-                      countUsers={this.props.countUsers}
-                      pageSize={this.props.pageSize}
-                      currentPage={this.props.currentPage}
-                      users={this.props.users}
-                      following={this.props.following}
-                      unfollow={this.props.unfollow}/>
-            </>
+                   countUsers={this.props.countUsers}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   users={this.props.users}
+                   following={this.props.following}
+                   unfollow={this.props.unfollow}
+                   followInProgress={this.props.followInProgress}
+                   toggleFollowInProgress={this.props.toggleFollowInProgress}
+            />
+        </>
     }
 }
 
@@ -53,7 +56,8 @@ let mapStateToProps = (state)=>{
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
         countUsers: state.usersPage.countUsers,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followInProgress: state.usersPage.followInProgress
     }
 }
 
@@ -83,6 +87,6 @@ let mapStateToProps = (state)=>{
 /*const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI);*/
 
 const UsersContainer = connect(mapStateToProps,
-    {following, unfollow, setUsers, setCurrentPage, setTotalUsers, toggleIsFetching})(UsersAPI);
+    {following, unfollow, setUsers, setCurrentPage, setTotalUsers, toggleIsFetching, toggleFollowInProgress})(UsersAPI);
 
 export default UsersContainer;
