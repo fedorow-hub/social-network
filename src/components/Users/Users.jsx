@@ -44,8 +44,8 @@ let Users = (props) => {
                         <div>
                             {u.followed
                                 ? <button disabled={props.followInProgress.some(id => id === u.id)} onClick={() => {
+
                                     props.toggleFollowInProgress(true, u.id)
-                                    debugger
                                     unfollowAPI(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {

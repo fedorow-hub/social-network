@@ -3,34 +3,21 @@ import {
     following,
     setCurrentPage,
     setTotalUsers,
-    setUsers, toggleFollowInProgress,
-    toggleIsFetching,
-    unfollow
+    setUserThinkCreator, toggleFollowInProgress,
+    unfollow, unfollowing
 } from "../Redux/Users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {getUsers} from "../../api/usersAPI/UsersAPI";
 
 class UsersAPI extends React.Component {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsers(data.totalCount);}
-            )
+        this.props.setUserThinkCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged =(pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true);
-        getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items)})
+        this.props.setUserThinkCreator(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -45,6 +32,7 @@ class UsersAPI extends React.Component {
                    unfollow={this.props.unfollow}
                    followInProgress={this.props.followInProgress}
                    toggleFollowInProgress={this.props.toggleFollowInProgress}
+                   unfollowing={this.props.unfollowing}
             />
         </>
     }
@@ -87,6 +75,6 @@ let mapStateToProps = (state)=>{
 /*const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI);*/
 
 const UsersContainer = connect(mapStateToProps,
-    {following, unfollow, setUsers, setCurrentPage, setTotalUsers, toggleIsFetching, toggleFollowInProgress})(UsersAPI);
+    {following, unfollow, setCurrentPage, setTotalUsers, toggleFollowInProgress, setUserThinkCreator, unfollowing})(UsersAPI);
 
 export default UsersContainer;
