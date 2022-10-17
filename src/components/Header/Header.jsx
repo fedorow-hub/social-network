@@ -1,8 +1,11 @@
 import s from './Header.module.css';
-const Header = () => {
+import {NavLink} from "react-router-dom";
+const Header = (props) => {
+    debugger
     return (
         <div className={s.header}>
-            header
+            {props.isAuth ? <div>{props.login}</div>
+                :<NavLink to={'/login'}>login</NavLink>}
         </div>
     );
 }
