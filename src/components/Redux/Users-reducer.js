@@ -1,4 +1,4 @@
-import {getUsers, unfollowAPI} from "../../api/usersAPI/UsersAPI";
+import {followAPI, getUsers, unfollowAPI} from "../../api/usersAPI/UsersAPI";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -62,7 +62,6 @@ const usersReducer = (state = initialState, action) => {
                     ? [...state.followInProgress, action.userId]
                     : [state.followInProgress.filter(id => id != action.userId)]
             }
-
         default:
             return state;
     }
@@ -84,7 +83,9 @@ export const setUserThinkCreator = (currentPage, pageSize) => {
             .then(data => {
                 dispatch(toggleIsFetching(false));
                 dispatch(setUsers(data.items));
-                dispatch(setTotalUsers(data.totalCount));}
+                dispatch(setTotalUsers(data.totalCount));
+                dispatch(setCurrentPage(currentPage))
+            }
             )
     }
 }
@@ -96,13 +97,26 @@ export const unfollowing = (id) => {
         unfollowAPI(id)
             .then(data => {
                 if (data.resultCode === 0) {
-                    unfollow(id)
+                    dispatch(unfollow(id))
                 }
                dispatch(toggleFollowInProgress(false, id));}
             )
     }
 }
 
-
+export const follow = (id) => {
+    debugger
+    return (dispatch)=> {
+        debugger
+        dispatch(toggleFollowInProgress(true, id))
+        followAPI(id)
+            .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(following(id))
+                }
+                dispatch(toggleFollowInProgress(false, id))
+            })
+    }
+}
 
 export default usersReducer;

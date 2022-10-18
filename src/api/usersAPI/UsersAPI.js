@@ -27,3 +27,8 @@ export const  followAPI = (id) => {
         .then(response => response.data)
 }
 
+export const  getProfileAPI = (id) => {
+    return  instance.get(`profile/${id}`)
+        .then(response => response.data)
+}
+

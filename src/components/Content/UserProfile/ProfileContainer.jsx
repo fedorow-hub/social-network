@@ -1,11 +1,10 @@
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import axios from "axios";
-import {setProfileUser} from "../../Redux/Profile-reducer";
+import {getProfile, setProfileUser} from "../../Redux/Profile-reducer";
 import React from "react";
 import {useParams} from "react-router-dom";
 import Preloader from "../../Common/Preloader/Preloader";
-import {toggleIsFetching} from "../../Redux/Users-reducer";
+import { toggleIsFetching} from "../../Redux/Users-reducer";
 
 function withRouter(Children){
     return(props)=>{
@@ -21,12 +20,14 @@ class ProfileAPI extends React.Component {
         if(!userID) {
             userID = 2
         }
-        this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
-            .then(response => {
+        this.props.getProfile(userID);
+
+       /* this.props.toggleIsFetching(true);
+        getProfileAPI(userID)
+            .then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setProfileUser(response.data)
-            })
+                this.props.setProfileUser(data)
+            })*/
     }
 
     render() {
@@ -47,6 +48,6 @@ let mapStateToProps = (state) => {
 
 let WithUrlDataProfileAPI = withRouter(ProfileAPI);
 
-const ProfileContainer = connect(mapStateToProps, {setProfileUser, toggleIsFetching})(WithUrlDataProfileAPI)
+const ProfileContainer = connect(mapStateToProps, {setProfileUser, toggleIsFetching, getProfile})(WithUrlDataProfileAPI)
 
 export default ProfileContainer;
