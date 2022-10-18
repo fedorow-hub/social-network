@@ -5,6 +5,7 @@ import React from "react";
 import {useParams} from "react-router-dom";
 import Preloader from "../../Common/Preloader/Preloader";
 import { toggleIsFetching} from "../../Redux/Users-reducer";
+import {compose} from "redux";
 
 function withRouter(Children){
     return(props)=>{
@@ -21,13 +22,6 @@ class ProfileAPI extends React.Component {
             userID = 2
         }
         this.props.getProfile(userID);
-
-       /* this.props.toggleIsFetching(true);
-        getProfileAPI(userID)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setProfileUser(data)
-            })*/
     }
 
     render() {
@@ -46,8 +40,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let WithUrlDataProfileAPI = withRouter(ProfileAPI);
-
-const ProfileContainer = connect(mapStateToProps, {setProfileUser, toggleIsFetching, getProfile})(WithUrlDataProfileAPI)
-
-export default ProfileContainer;
+export default compose(
+    connect(mapStateToProps, {setProfileUser, toggleIsFetching, getProfile}),
+    withRouter
+)(ProfileAPI)

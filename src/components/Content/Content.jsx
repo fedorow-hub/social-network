@@ -2,6 +2,7 @@ import s from './Content.module.css';
 import PostsContainer from "./Posts/PostsContainer";
 import ProfileContainer from "./UserProfile/ProfileContainer";
 import {WithAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 const Content = () => {
     return (
@@ -12,6 +13,6 @@ const Content = () => {
     );
 }
 
-let ContentContainer = WithAuthRedirect(Content);
-
-export default ContentContainer;
+export default compose(
+    WithAuthRedirect
+)(Content)
