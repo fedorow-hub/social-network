@@ -2,7 +2,6 @@ import {ProfileAPI} from "../../api/usersAPI/UsersAPI";
 import {toggleIsFetching} from "./Users-reducer";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_TEXTAREA = 'UPDATE-TEXTAREA';
 const SET_PROFILE_USER = 'SET-PROFILE-USER';
 const SET_USER_STATUS = 'SET-USER-STATUS'
 
@@ -11,7 +10,6 @@ let initialState = {
         {id: 1, message: 'Hi there'},
         {id: 2, message: 'Hi i am fine'}
     ],
-    newPostText: 'New post text',
     userProfile: null,
     status: ""
 }
@@ -21,17 +19,11 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let post = {
                 id: 3,
-                message: state.newPostText
+                message: action.post
             }
             return {
                 ...state,
-                newPostText: '',
                 Posts: [...state.Posts, post]
-            }
-        case UPDATE_TEXTAREA:
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case SET_PROFILE_USER:
             return {
@@ -48,11 +40,9 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const updateTextareaActionCreator = (text) => ({ type: UPDATE_TEXTAREA, newText: text })
+export const addPost = (post) => ({ type: ADD_POST, post})
 export const setProfileUser = (profile) => ({ type: SET_PROFILE_USER, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
-
 
 export const getProfile = (id) => {
     return (dispatch)=> {
