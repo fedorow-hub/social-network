@@ -26,9 +26,7 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (id, email, login) => ({ type: SET_AUTH_DATA, data: {id, email, login} })
 
 export const getAuthorization = () => {
-    debugger
     return (dispatch)=> {
-        debugger
         authorization()
             .then(data => {
                 if(data.resultCode === 0){

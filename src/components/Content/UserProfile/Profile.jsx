@@ -3,7 +3,6 @@ import ProfileStatus from './ProfileStatus'
 
 
 let Profile = (props) => {
-    debugger
     if(!props.userProfile){
         return (
             <div><Preloader/></div>
