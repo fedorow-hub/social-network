@@ -9,7 +9,6 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {WithAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
 class UsersAPI extends React.Component {
@@ -51,7 +50,6 @@ let mapStateToProps = (state)=>{
 }
 
 export default compose(
-    WithAuthRedirect,
     connect(mapStateToProps,
         {
             setCurrentPage, setTotalUsers,

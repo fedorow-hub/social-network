@@ -2,7 +2,7 @@ import Header from "./Header";
 import {useParams} from "react-router-dom";
 import React from "react";
 import {connect} from "react-redux";
-import {getAuthorization, logout, setAuthUserData} from "../Redux/auth-reducer";
+import {logout, setAuthUserData} from "../Redux/auth-reducer";
 import {compose} from "redux";
 
 export function withRouter(Children){
@@ -13,11 +13,6 @@ export function withRouter(Children){
 }
 
 class HeaderContainerWithUrlData extends React.Component {
-
-    componentDidMount() {
-        this.props.getAuthorization()
-    }
-
     render() {
         return <Header {...this.props} />
     }
@@ -30,7 +25,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {setAuthUserData, getAuthorization, logout})
+    connect(mapStateToProps, {setAuthUserData, logout})
 )
 (HeaderContainerWithUrlData)
 
