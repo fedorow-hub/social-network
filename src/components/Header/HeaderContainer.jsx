@@ -4,6 +4,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {logout, setAuthUserData} from "../Redux/auth-reducer";
 import {compose} from "redux";
+import {getIsAuth, getLogin} from "../Redux/auth-selector";
 
 export function withRouter(Children){
     return(props)=>{
@@ -19,8 +20,8 @@ class HeaderContainerWithUrlData extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    login: state.auth.login
+    isAuth: getIsAuth(state),
+    login: getLogin(state)
 })
 
 export default compose(

@@ -5,6 +5,7 @@ import {login} from "../Redux/auth-reducer";
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
 import style from "./../Common/FormControlls/FormControlls.module.css";
+import {getIsAuth} from "../Redux/auth-selector";
 
 
 let maxLength30 = maxLengthCreator(30)
@@ -49,7 +50,7 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: getIsAuth(state)
     }
 }
 

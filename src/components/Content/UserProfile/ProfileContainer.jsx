@@ -6,6 +6,8 @@ import {useParams} from "react-router-dom";
 import Preloader from "../../Common/Preloader/Preloader";
 import { toggleIsFetching} from "../../Redux/Users-reducer";
 import {compose} from "redux";
+import {getId, getUserProfile} from "../../Redux/profile-selector";
+import {getIsFetching} from "../../Redux/users-selector";
 
 function withRouter(Children){
     return(props)=>{
@@ -39,10 +41,10 @@ class ProfileAPI extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        userProfile: state.profilePage.userProfile,
-        isFetching: state.usersPage.isFetching,
-        status: state.profilePage.status,
-        authorizedUserId: state.auth.id
+        userProfile: getUserProfile(state),
+        isFetching: getIsFetching(state),
+        status: getStatus(state),
+        authorizedUserId: getId(state)
     }
 }
 
