@@ -2,7 +2,8 @@ import Header from "./Header";
 import {useParams} from "react-router-dom";
 import React from "react";
 import {connect} from "react-redux";
-import {getAuthorization, setAuthUserData} from "../Redux/auth-reducer";
+import {getAuthorization, logout, setAuthUserData} from "../Redux/auth-reducer";
+import {compose} from "redux";
 
 export function withRouter(Children){
     return(props)=>{
@@ -27,8 +28,9 @@ let mapStateToProps = (state) => ({
     login: state.auth.login
 })
 
-let WithUrlDataHeaderContainer = withRouter(HeaderContainerWithUrlData);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {setAuthUserData, getAuthorization, logout})
+)
+(HeaderContainerWithUrlData)
 
-const HeaderContainer = connect(mapStateToProps, {setAuthUserData, getAuthorization})(WithUrlDataHeaderContainer)
-
-export default HeaderContainer;

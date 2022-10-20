@@ -3,7 +3,11 @@ import {NavLink} from "react-router-dom";
 const Header = (props) => {
     return (
         <div className={s.header}>
-            {props.isAuth ? <div>{props.login}</div>
+            {props.isAuth ?
+                <div>
+                    <div>{props.login} <button onClick={props.logout}>Logout</button></div>
+                </div>
+
                 :<NavLink to={'/login'}>login</NavLink>}
         </div>
     );

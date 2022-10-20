@@ -6,7 +6,7 @@ import {compose} from "redux";
 
 let mapStateToProps = (state)=>{
     return{
-        dialogPage: state.dialogPage,
+        dialogPage: state.dialogPage
     }
 }
 
