@@ -2,7 +2,7 @@ export const getUserProfile = (state) => {
     return state.profilePage.userProfile;
 }
 
-export const getStatus = (state) => {
+export const getUserStatus = (state) => {
     return state.profilePage.status;
 }
 

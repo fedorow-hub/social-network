@@ -3,6 +3,7 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 let Profile = (props) => {
+    debugger
     if(!props.userProfile){
         return (
             <div><Preloader/></div>
