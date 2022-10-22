@@ -1,15 +1,12 @@
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import {Route, Routes} from "react-router-dom";
-/*import UsersContainer from "./components/Users/UsersContainer";*/
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-/*import ContentContainer from "./components/Content/Content";*/
 import React, {Component, lazy, Suspense} from "react";
 import {connect} from "react-redux";
 import {initializeAPP} from "./components/Redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
-//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
