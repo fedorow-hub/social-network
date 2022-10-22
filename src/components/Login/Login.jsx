@@ -9,9 +9,9 @@ import {getIsAuth} from "../Redux/auth-selector";
 
 
 let maxLength30 = maxLengthCreator(30)
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field name="email" component={Input} type="email" validate={[required, maxLength30]} />
             </div>
@@ -21,8 +21,8 @@ const LoginForm = (props) => {
             <div>
                 <Field name="rememberMe" component={Input} type="checkbox" />
             </div>
-            {props.error && <div className={style.formSummaryError}>
-                {props.error}
+            {error && <div className={style.formSummaryError}>
+                {error}
 
             </div>}
             <button>Submit</button>

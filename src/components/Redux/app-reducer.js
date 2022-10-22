@@ -1,7 +1,7 @@
 
 import {getAuthorization} from "./auth-reducer";
 
-const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS';
+const SET_INITIALIZED_SUCCESS = 'social_network/app/SET_INITIALIZED_SUCCESS';
 
 let initialState = {
     initialized: false

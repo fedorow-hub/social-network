@@ -2,16 +2,15 @@ import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
-let Profile = (props) => {
-    debugger
-    if(!props.userProfile){
+let Profile = ({userProfile, ...props}) => {
+    if(!userProfile){
         return (
             <div><Preloader/></div>
             )
     }
     return (
         <div>
-            <img src={props.userProfile.photos.small} alt='image'/>
+            <img src={userProfile.photos.small} alt='image'/>
             <ProfileStatusWithHooks {...props}/>
         </div>
 

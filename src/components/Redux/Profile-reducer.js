@@ -1,9 +1,9 @@
 import {ProfileAPI} from "../../api/usersAPI/UsersAPI";
 import {toggleIsFetching} from "./Users-reducer";
 
-const ADD_POST = 'ADD-POST';
-const SET_PROFILE_USER = 'SET-PROFILE-USER';
-const SET_USER_STATUS = 'SET-USER-STATUS'
+const ADD_POST = 'social_network/profile/ADD-POST';
+const SET_PROFILE_USER = 'social_network/profile/SET-PROFILE-USER';
+const SET_USER_STATUS = 'social_network/profile/SET-USER-STATUS'
 
 let initialState = {
     Posts: [
@@ -44,34 +44,22 @@ export const addPost = (post) => ({ type: ADD_POST, post})
 export const setProfileUser = (profile) => ({ type: SET_PROFILE_USER, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 
-export const getProfile = (id) => {
-    return (dispatch)=> {
-        dispatch(toggleIsFetching(true));
-        ProfileAPI.getProfile(id)
-            .then(data => {
-                dispatch(toggleIsFetching(false));
-                dispatch(setProfileUser(data));
-            })
-    }
+export const getProfile = (id) => async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    let data = await ProfileAPI.getProfile(id);
+    dispatch(toggleIsFetching(false));
+    dispatch(setProfileUser(data));
 }
 
-export const getStatus = (userId) => {
-    return (dispatch)=> {
-        ProfileAPI.getStatus(userId)
-            .then(responce => {
-                dispatch(setUserStatus(responce.data));
-            })
-    }
+export const getStatus = (userId) => async (dispatch) => {
+    let responce = await ProfileAPI.getStatus(userId);
+    dispatch(setUserStatus(responce.data));
 }
 
-export const updateUserStatus = (status) => {
-    return (dispatch)=> {
-        ProfileAPI.updateStatus(status)
-            .then(responce => {
-                if(responce.data.resultCode === 0) {
-                    dispatch(setUserStatus(status));
-                }
-            })
+export const updateUserStatus = (status) => async (dispatch) => {
+    let responce = await ProfileAPI.updateStatus(status);
+    if (responce.data.resultCode === 0) {
+        dispatch(setUserStatus(status));
     }
 }
 
