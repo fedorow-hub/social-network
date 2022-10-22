@@ -1,5 +1,6 @@
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import userImage from "./../../../assets/images/user.png";
 
 
 let Profile = ({userProfile, ...props}) => {
@@ -10,7 +11,7 @@ let Profile = ({userProfile, ...props}) => {
     }
     return (
         <div>
-            <img src={userProfile.photos.small} alt='image'/>
+            <img src={userProfile.photos.large || userImage} alt='image'/>
             <ProfileStatusWithHooks {...props}/>
         </div>
 
