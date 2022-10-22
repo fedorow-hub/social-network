@@ -1,0 +1,18 @@
+.wrapper {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 30px;
+  display: grid;
+  grid-template-areas: 
+  "h h"
+  "s m";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+
+}
+
+
+
+
+
+
