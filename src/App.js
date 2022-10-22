@@ -1,16 +1,19 @@
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {Route, Routes} from "react-router-dom";
-import UsersContainer from "./components/Users/UsersContainer";
+/*import UsersContainer from "./components/Users/UsersContainer";*/
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import ContentContainer from "./components/Content/Content";
-import {Component} from "react";
+/*import ContentContainer from "./components/Content/Content";*/
+import React, {Component, lazy, Suspense} from "react";
 import {connect} from "react-redux";
 import {initializeAPP} from "./components/Redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
+const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
+const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
+const ContentContainer = lazy(() => import('./components/Content/Content'));
 
 class App extends Component {
 
@@ -26,13 +29,16 @@ class App extends Component {
             <div className="wrapper">
                 <HeaderContainer/>
                 <Sidebar/>
-                <Routes>
-                    <Route path='/messages/*' element={<DialogsContainer/>}/>
-                    <Route path='/profile/*' element={<ContentContainer/>}/>
-                    <Route path='/profile/:id' element={<ContentContainer/>}/>
-                    <Route path='/users/*' element={<UsersContainer/>}/>
-                    <Route path='/login/' element={<Login/>}/>
-                </Routes>
+                <Suspense fallback={<Preloader/>}>
+                    <Routes>
+                        <Route path='/' element={<UsersContainer/>}/>
+                        <Route path='/messages/*' element={<DialogsContainer/>}/>
+                        <Route path='/profile/*' element={<ContentContainer/>}/>
+                        <Route path='/profile/:id' element={<ContentContainer/>}/>
+                        <Route path='/users/*' element={<UsersContainer/>}/>
+                        <Route path='/login/' element={<Login/>}/>
+                    </Routes>
+                </Suspense>
             </div>
         );
     }

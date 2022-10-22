@@ -14,9 +14,7 @@ let Paginator = ({totalItemsCount, pageSize, portionSize=10, ...props}) => {
     let portionCount = Math.ceil(countPage / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
     let leftPortionPageNumber = (portionNumber-1) * portionSize + 1;
-
     let rightPortionPageNumber = portionNumber * portionSize;
-    debugger
 
     return (
         <div className={styles.pagination}>
