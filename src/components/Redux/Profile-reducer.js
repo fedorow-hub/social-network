@@ -1,9 +1,8 @@
 import {ProfileAPI} from "../../api/usersAPI/UsersAPI";
-import {toggleIsFetching} from "./Users-reducer";
-
 const ADD_POST = 'social_network/profile/ADD-POST';
 const SET_PROFILE_USER = 'social_network/profile/SET-PROFILE-USER';
 const SET_USER_STATUS = 'social_network/profile/SET-USER-STATUS'
+const UPDATE_USER_PHOTO = 'social_network/profile/UPDATE-USER-PHOTO'
 
 let initialState = {
     Posts: [
@@ -35,6 +34,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
+        case UPDATE_USER_PHOTO:
+
+            return {
+                ...state, userProfile: {...state.userProfile, photos: action.photos}
+            }
         default:
             return state;
     }
@@ -43,23 +47,33 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = (post) => ({ type: ADD_POST, post})
 export const setProfileUser = (profile) => ({ type: SET_PROFILE_USER, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
+export const updateUserFotoSuccess = (photos) => ({ type: UPDATE_USER_PHOTO, photos })
 
 export const getProfile = (id) => async (dispatch) => {
-    dispatch(toggleIsFetching(true));
+
     let data = await ProfileAPI.getProfile(id);
-    dispatch(toggleIsFetching(false));
     dispatch(setProfileUser(data));
+
 }
 
 export const getStatus = (userId) => async (dispatch) => {
+    //dispatch(toggleIsFetching(true));
     let responce = await ProfileAPI.getStatus(userId);
     dispatch(setUserStatus(responce.data));
+    //dispatch(toggleIsFetching(false));
 }
 
 export const updateUserStatus = (status) => async (dispatch) => {
     let responce = await ProfileAPI.updateStatus(status);
     if (responce.data.resultCode === 0) {
         dispatch(setUserStatus(status));
+    }
+}
+
+export const setFileUserAva = (file) => async (dispatch) => {
+    let responce = await ProfileAPI.updateFile(file);
+    if (responce.data.resultCode === 0) {
+        dispatch(updateUserFotoSuccess(responce.data.data.photos));
     }
 }
 

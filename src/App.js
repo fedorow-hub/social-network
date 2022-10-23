@@ -10,7 +10,7 @@ import Preloader from "./components/Common/Preloader/Preloader";
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
-const ContentContainer = lazy(() => import('./components/Content/Content'));
+const Content = lazy(() => import('./components/Content/Content'));
 
 class App extends Component {
 
@@ -30,8 +30,8 @@ class App extends Component {
                     <Routes>
                         <Route path='/' element={<UsersContainer/>}/>
                         <Route path='/messages/*' element={<DialogsContainer/>}/>
-                        <Route path='/profile/*' element={<ContentContainer/>}/>
-                        <Route path='/profile/:id' element={<ContentContainer/>}/>
+                        <Route path='/profile/*' element={<Content/>}/>
+                        <Route path='/profile/:id' element={<Content/>}/>
                         <Route path='/users/*' element={<UsersContainer/>}/>
                         <Route path='/login/' element={<Login/>}/>
                     </Routes>

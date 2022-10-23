@@ -1,6 +1,6 @@
 import s from './Content.module.css';
 import PostsContainer from "./Posts/PostsContainer";
-import ProfileContainer from "./UserProfile/ProfileContainer";
+import ProfileContainer from "./ProfileContainer/ProfileContainer";
 import {WithAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
