@@ -1,9 +1,12 @@
+// @ts-ignore
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Messages/Messages";
 import { Field, reduxForm } from 'redux-form'
 import {Textarea} from "../Common/FormControlls/FormControlls";
 import {maxLengthCreator, required} from "../Utils/Validators/Validators";
+import React from 'react';
+import {DialogsDataType, MessagesType} from "../../types/types";
 
 const maxLength40 = maxLengthCreator(40);
 const MessageForm = (props) => {
@@ -24,15 +27,21 @@ const MessageForm = (props) => {
 
 const MessageReduxForm = reduxForm({form: 'messageForm'})(MessageForm);
 
-const Dialogs = (props) => {
-    let DialogElements = props.dialogPage.DialogsData
+type PropsType = {
+    dialogsData:  Array<DialogsDataType>
+    messages: Array<MessagesType>
+    sendMessage: (message: string) => void
+}
+
+const Dialogs: React.FC<PropsType> = ({dialogsData, messages, sendMessage}) => {
+    let DialogElements = dialogsData
         .map(dialog => <DialogItem key={dialog.id} name = {dialog.name} id = {dialog.id}/>)
 
-    let MessageElements = props.dialogPage.Messages
+    let MessageElements = messages
         .map(message => <Message key={message.id} message ={message.message}/>)
 
-    const sendMessage = (values) => {
-        props.sendMessage(values.message);
+    const sendMessages = (values) => {
+        sendMessage(values.message);
     }
     return (
         <div className={s.dialogs}>
@@ -41,7 +50,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 <div>{MessageElements}</div>
-                <MessageReduxForm onSubmit={sendMessage}/>
+                <MessageReduxForm onSubmit={sendMessages}/>
             </div>
         </div>
     )

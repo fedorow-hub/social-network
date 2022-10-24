@@ -1,12 +1,14 @@
-import {sendMessageActionCreator,} from "../Redux/dialogs-reducer.ts";
+import {sendMessageActionCreator,} from "../Redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {WithAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {AppStateType} from "../Redux/Redux-store";
 
-let mapStateToProps = (state)=>{
+let mapStateToProps = (state: AppStateType)=>{
     return{
-        dialogPage: state.dialogPage
+        dialogsData: state.dialogPage.DialogsData,
+        messages: state.dialogPage.Messages
     }
 }
 

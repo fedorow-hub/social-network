@@ -1,13 +1,14 @@
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {getProfile, getStatus, setFileUserAva, setProfileUser, updateUserStatus} from "../../Redux/profile-reducer.ts";
+import {getProfile, getStatus, setFileUserAva, updateUserStatus} from "../../Redux/profile-reducer";
 import React from "react";
 import {useParams} from "react-router-dom";
 import Preloader from "../../Common/Preloader/Preloader";
-import {toggleIsFetching} from "../../Redux/users-reducer.ts";
 import {compose} from "redux";
 import {getId, getUserProfile, getUserStatus} from "../../Redux/profile-selector";
 import {getIsFetching} from "../../Redux/users-selector";
+import {AppStateType} from "../../Redux/Redux-store";
+import {ProfileType} from "../../../types/types";
 
 function withRouter(Children){
     return(props)=>{
@@ -16,7 +17,27 @@ function withRouter(Children){
     }
 }
 
-class ProfileAPI extends React.Component {
+type MapStateToPropsType = {
+    userProfile: ProfileType
+    status: string
+    authorizedUserId: number
+    isFetching: boolean
+    //match: any
+}
+
+type MapDispatchToPropsType = {
+    updateUserStatus: (status: string) => void
+    setFileUserAva: (any) => void
+    getProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+}
+
+type OwnPropsType = {}
+
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
+
+class ProfileAPI extends React.Component<PropsType> {
 
     refreshProfile() {
         let userID = this.props.match.params.id;
@@ -52,7 +73,7 @@ class ProfileAPI extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         userProfile: getUserProfile(state),
         isFetching: getIsFetching(state),
@@ -62,7 +83,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {setProfileUser, toggleIsFetching,
-        getProfile, getStatus, updateUserStatus, setFileUserAva}),
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps,
+        {getProfile, getStatus, updateUserStatus, setFileUserAva}),
     withRouter
 )(ProfileAPI)

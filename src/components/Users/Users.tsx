@@ -22,8 +22,7 @@ let Users: React.FC<PropsType> = ({
                                       followInProgress,
                                       users,
                                       unfollowing,
-                                      follow,
-                                      /*toggleFollowInProgress*/
+                                      follow
                                   }) => {
     return (
         <div>
@@ -39,7 +38,6 @@ let Users: React.FC<PropsType> = ({
                                          followInProgress={followInProgress}
                                          unfollowing={unfollowing}
                                          follow={follow}
-                                         /*toggleFollowInProgress={toggleFollowInProgress}*/
                     />)
                 }
             </div>

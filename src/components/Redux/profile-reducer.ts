@@ -1,20 +1,11 @@
 import {ProfileAPI} from "../../api/usersAPI/UsersAPI";
-import {ContactsType, PhotosType, PostsType } from "../../types/types";
+import {PhotosType, PostsType, ProfileType} from "../../types/types";
 
 const ADD_POST = 'social_network/profile/ADD-POST';
 const SET_PROFILE_USER = 'social_network/profile/SET-PROFILE-USER';
 const SET_USER_STATUS = 'social_network/profile/SET-USER-STATUS'
 const UPDATE_USER_PHOTO = 'social_network/profile/UPDATE-USER-PHOTO'
 
-
-type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-}
 let initialState = {
     Posts: [
         {id: 1, message: 'Hi there'},

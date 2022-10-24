@@ -1,14 +1,6 @@
+import {DialogsDataType, MessagesType} from "../../types/types";
+
 const SEND_MESSAGE = 'social_network/dialog/SEND-MESSAGE';
-
-type DialogsDataType = {
-    id: number
-    name: string
-}
-
-type MessagesType = {
-    id: number
-    message: string
-}
 
 let initialState = {
     DialogsData: [
