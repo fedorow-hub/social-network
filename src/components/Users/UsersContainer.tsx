@@ -5,7 +5,7 @@ import {
     setTotalUsers,
     setUserThinkCreator, toggleFollowInProgress,
     unfollowing
-} from "../Redux/users-reducer.ts";
+} from "../Redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
@@ -18,14 +18,28 @@ import {
     getPageSize,
     getUsers
 } from "../Redux/users-selector";
+import {UserType} from "../../types/types";
 
-class UsersAPI extends React.Component {
+type PropsType = {
+    setUserThinkCreator: (currentPage: number, pageSize: number) => void
+    currentPage: number
+    pageSize: number
+    isFetching: boolean
+    countUsers: number
+    users: Array<UserType>
+    followInProgress: boolean
+    toggleFollowInProgress: (isFetching: boolean, id: number) => void
+    unfollowing: () => void
+    follow: () => void
+}
+
+class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.setUserThinkCreator(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChanged =(pageNumber) => {
+    onPageChanged =(pageNumber: number) => {
         this.props.setUserThinkCreator(pageNumber, this.props.pageSize)
     }
 
@@ -63,4 +77,4 @@ export default compose(
             setCurrentPage, setTotalUsers,
             toggleFollowInProgress, setUserThinkCreator, unfollowing, follow
         })
-)(UsersAPI)
+)(UsersContainer)

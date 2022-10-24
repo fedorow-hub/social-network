@@ -7,9 +7,10 @@ import React, {Component, lazy, Suspense} from "react";
 import {connect} from "react-redux";
 import {initializeAPP} from "./components/Redux/app-reducer.ts";
 import Preloader from "./components/Common/Preloader/Preloader";
+import UsersContainer from './components/Users/UsersContainer.tsx';
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
-const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
+/*const UsersContainer = lazy(() => import('./components/Users/UsersContainer.tsx'));*/
 const Content = lazy(() => import('./components/Content/Content'));
 
 class App extends Component {

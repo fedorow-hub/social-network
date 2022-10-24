@@ -1,4 +1,4 @@
-import userImage from "../../../../assets/images/user.png";
+//import userImage from "../../../../assets/images/user.png";
 
 const ProfileInfo = ({userProfile, isOwner, ...props}) => {
     const onChangeFileUserAva = (e) => {
@@ -8,7 +8,7 @@ const ProfileInfo = ({userProfile, isOwner, ...props}) => {
 
     }
     return (<div>
-            <img src={userProfile.photos.large ? userProfile.photos.large: userImage} alt='image'/>
+            {/*<img src={userProfile.photos.large ? userProfile.photos.large: userImage} alt='image'/>*/}
             {isOwner && <input type={"file"} onChange={onChangeFileUserAva}/>}
     </div>
     )
