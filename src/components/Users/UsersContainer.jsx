@@ -5,7 +5,7 @@ import {
     setTotalUsers,
     setUserThinkCreator, toggleFollowInProgress,
     unfollowing
-} from "../Redux/Users-reducer";
+} from "../Redux/users-reducer.ts";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";

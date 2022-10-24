@@ -4,13 +4,16 @@ import {stopSubmit} from "redux-form";
 const SET_AUTH_DATA = 'social_network/auth/SET-AUTH-DATA';
 
 let initialState = {
-    id: null,
-    email: null,
-    login: null,
+    id: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false
 }
 
-const authReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+
+const authReducer = (state = initialState, action): InitialStateType => {
     switch (action.type) {
         case SET_AUTH_DATA:
             return {
@@ -22,7 +25,19 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (id, email, login, isAuth) => ({
+type setAuthUserDataActionPayloadType = {
+    id: number
+    email: string
+    login: string
+    isAuth: boolean
+}
+
+type setAuthUserDataActionType = {
+    type: typeof SET_AUTH_DATA,
+    payload: setAuthUserDataActionPayloadType
+}
+
+export const setAuthUserData = (id, email, login, isAuth): setAuthUserDataActionType => ({
     type: SET_AUTH_DATA,
     payload: {id, email, login, isAuth}
 })

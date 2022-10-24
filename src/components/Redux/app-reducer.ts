@@ -1,13 +1,18 @@
 
-import {getAuthorization} from "./auth-reducer";
+// @ts-ignore
+import {getAuthorization} from "./auth-reducer.ts";
 
 const SET_INITIALIZED_SUCCESS = 'social_network/app/SET_INITIALIZED_SUCCESS';
 
-let initialState = {
+export type InitialStateType = {
+    initialized: boolean
+}
+
+let initialState: InitialStateType = {
     initialized: false
 }
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action): InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZED_SUCCESS:
             return  {
@@ -19,7 +24,11 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-export const setInitializedSuccess = () => ({ type: SET_INITIALIZED_SUCCESS })
+type SetInitializedSuccessActionType = {
+    type: typeof SET_INITIALIZED_SUCCESS;
+}
+
+export const setInitializedSuccess = (): SetInitializedSuccessActionType => ({ type: SET_INITIALIZED_SUCCESS })
 
 export const initializeAPP = () => {
     return (dispatch)=> {

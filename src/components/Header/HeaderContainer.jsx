@@ -2,7 +2,7 @@ import Header from "./Header";
 import {useParams} from "react-router-dom";
 import React from "react";
 import {connect} from "react-redux";
-import {logout, setAuthUserData} from "../Redux/auth-reducer";
+import {logout, setAuthUserData} from "../Redux/auth-reducer.ts";
 import {compose} from "redux";
 import {getIsAuth, getLogin} from "../Redux/auth-selector";
 

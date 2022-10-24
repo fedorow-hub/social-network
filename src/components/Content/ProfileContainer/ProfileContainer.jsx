@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {getProfile, getStatus, setFileUserAva, setProfileUser, updateUserStatus} from "../../Redux/Profile-reducer";
+import {getProfile, getStatus, setFileUserAva, setProfileUser, updateUserStatus} from "../../Redux/profile-reducer.ts";
 import React from "react";
 import {useParams} from "react-router-dom";
 import Preloader from "../../Common/Preloader/Preloader";
-import {toggleIsFetching} from "../../Redux/Users-reducer";
+import {toggleIsFetching} from "../../Redux/users-reducer.ts";
 import {compose} from "redux";
 import {getId, getUserProfile, getUserStatus} from "../../Redux/profile-selector";
 import {getIsFetching} from "../../Redux/users-selector";

@@ -1,19 +1,32 @@
 import {ProfileAPI} from "../../api/usersAPI/UsersAPI";
+import {ContactsType, PhotosType, PostsType } from "../../types/types";
+
 const ADD_POST = 'social_network/profile/ADD-POST';
 const SET_PROFILE_USER = 'social_network/profile/SET-PROFILE-USER';
 const SET_USER_STATUS = 'social_network/profile/SET-USER-STATUS'
 const UPDATE_USER_PHOTO = 'social_network/profile/UPDATE-USER-PHOTO'
 
+
+type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+}
 let initialState = {
     Posts: [
         {id: 1, message: 'Hi there'},
         {id: 2, message: 'Hi i am fine'}
-    ],
-    userProfile: null,
+    ] as Array<PostsType>,
+    userProfile: null as ProfileType | null,
     status: ""
 }
 
-const profileReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const profileReducer = (state = initialState, action): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let post = {
@@ -44,10 +57,30 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = (post) => ({ type: ADD_POST, post})
-export const setProfileUser = (profile) => ({ type: SET_PROFILE_USER, profile })
-export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
-export const updateUserFotoSuccess = (photos) => ({ type: UPDATE_USER_PHOTO, photos })
+type AddPostActionType = {
+    type: typeof ADD_POST
+    post: string
+}
+export const addPost = (post): AddPostActionType => ({ type: ADD_POST, post})
+
+type SetProfileUserActonType = {
+    type: typeof SET_PROFILE_USER
+    profile: ProfileType
+}
+export const setProfileUser = (profile): SetProfileUserActonType => ({ type: SET_PROFILE_USER, profile })
+
+type setUserStatusActionType = {
+    type: typeof SET_USER_STATUS
+    status: string
+}
+export const setUserStatus = (status): setUserStatusActionType => ({ type: SET_USER_STATUS, status })
+
+type UpdateUserFotoSuccessActionType = {
+    type: typeof UPDATE_USER_PHOTO
+    photos: PhotosType
+}
+export const updateUserFotoSuccess = (photos): UpdateUserFotoSuccessActionType => ({ type: UPDATE_USER_PHOTO, photos })
+
 
 export const getProfile = (id) => async (dispatch) => {
 
