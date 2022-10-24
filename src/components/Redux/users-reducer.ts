@@ -106,7 +106,7 @@ type ToggleFollowInProgressActionType = {
 }
 export const toggleFollowInProgress = (isFetching, userId): ToggleFollowInProgressActionType => ({ type: TOGGLE_FOLLOW_IN_PROGRESS, isFetching, userId })
 
-export const setUserThinkCreator = (currentPage, pageSize) => async (dispatch) => {
+export const setAllUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     let data = await UserAPI.getUsers(currentPage, pageSize);
     dispatch(toggleIsFetching(false));

@@ -1,10 +1,8 @@
 import {connect} from "react-redux";
 import {
     follow,
-    setCurrentPage,
-    setTotalUsers,
-    setUserThinkCreator,
-    unfollowing
+    unfollowing,
+    setAllUsers
 } from "../Redux/users-reducer";
 import React from "react";
 import Users from "./Users";
@@ -19,28 +17,35 @@ import {
     getUsers
 } from "../Redux/users-selector";
 import {UserType} from "../../types/types";
+import {AppStateType} from "../Redux/Redux-store";
 
-type PropsType = {
-    setUserThinkCreator: (currentPage: number, pageSize: number) => void
+type MapStateToPropsType = {
     currentPage: number
     pageSize: number
     isFetching: boolean
     countUsers: number
     users: Array<UserType>
-    followInProgress: boolean
-    /*toggleFollowInProgress: (isFetching: boolean, id: number) => void*/
-    unfollowing: () => void
-    follow: () => void
+    followInProgress: Array<number>
 }
+
+type MapDispatchToPropsType = {
+    setAllUsers: (currentPage: number, pageSize: number) => void
+    unfollowing: (userId: number) => void
+    follow: (userId: number) => void
+}
+
+type OwnPropsType = {}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
 class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        this.props.setUserThinkCreator(this.props.currentPage, this.props.pageSize)
+        this.props.setAllUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged =(pageNumber: number) => {
-        this.props.setUserThinkCreator(pageNumber, this.props.pageSize)
+        this.props.setAllUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -52,7 +57,6 @@ class UsersContainer extends React.Component<PropsType> {
                    currentPage={this.props.currentPage}
                    users={this.props.users}
                    followInProgress={this.props.followInProgress}
-                   /*toggleFollowInProgress={this.props.toggleFollowInProgress}*/
                    unfollowing={this.props.unfollowing}
                    follow={this.props.follow}
             />
@@ -60,7 +64,7 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state)=>{
+let mapStateToProps = (state: AppStateType)=>{
     return{
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -72,9 +76,8 @@ let mapStateToProps = (state)=>{
 }
 
 export default compose(
-    connect(mapStateToProps,
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps,
         {
-            setCurrentPage, setTotalUsers,
-            /*toggleFollowInProgress,*/ setUserThinkCreator, unfollowing, follow
+            setAllUsers, unfollowing, follow
         })
 )(UsersContainer)
