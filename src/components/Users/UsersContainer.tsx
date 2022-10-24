@@ -3,7 +3,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsers,
-    setUserThinkCreator, toggleFollowInProgress,
+    setUserThinkCreator,
     unfollowing
 } from "../Redux/users-reducer";
 import React from "react";
@@ -28,7 +28,7 @@ type PropsType = {
     countUsers: number
     users: Array<UserType>
     followInProgress: boolean
-    toggleFollowInProgress: (isFetching: boolean, id: number) => void
+    /*toggleFollowInProgress: (isFetching: boolean, id: number) => void*/
     unfollowing: () => void
     follow: () => void
 }
@@ -52,7 +52,7 @@ class UsersContainer extends React.Component<PropsType> {
                    currentPage={this.props.currentPage}
                    users={this.props.users}
                    followInProgress={this.props.followInProgress}
-                   toggleFollowInProgress={this.props.toggleFollowInProgress}
+                   /*toggleFollowInProgress={this.props.toggleFollowInProgress}*/
                    unfollowing={this.props.unfollowing}
                    follow={this.props.follow}
             />
@@ -75,6 +75,6 @@ export default compose(
     connect(mapStateToProps,
         {
             setCurrentPage, setTotalUsers,
-            toggleFollowInProgress, setUserThinkCreator, unfollowing, follow
+            /*toggleFollowInProgress,*/ setUserThinkCreator, unfollowing, follow
         })
 )(UsersContainer)

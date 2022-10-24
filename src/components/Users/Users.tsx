@@ -9,7 +9,7 @@ type PropsType = {
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     followInProgress: boolean
-    toggleFollowInProgress: (isFetching: boolean, id: number) => void
+    /*toggleFollowInProgress: (isFetching: boolean, id: number) => void*/
     users: Array<UserType>
     unfollowing: () => void
     follow: () => void
@@ -24,7 +24,7 @@ let Users: React.FC<PropsType> = ({
                                       users,
                                       unfollowing,
                                       follow,
-                                      toggleFollowInProgress
+                                      /*toggleFollowInProgress*/
                                   }) => {
     return (
         <div>
@@ -40,7 +40,7 @@ let Users: React.FC<PropsType> = ({
                                          followInProgress={followInProgress}
                                          unfollowing={unfollowing}
                                          follow={follow}
-                                         toggleFollowInProgress={toggleFollowInProgress}
+                                         /*toggleFollowInProgress={toggleFollowInProgress}*/
                     />)
                 }
             </div>
