@@ -1,10 +1,10 @@
 import preloader from '../../../assets/images/Basketball.gif';
 
-let Preloader =()=> {
+const Preloader = () => {
     return (
         <div>
-            <img src={preloader} alt='preloader'/>
+            <img src={preloader} alt="preloader" />
         </div>
-    )
-}
+    );
+};
 export default Preloader;

@@ -1,70 +1,77 @@
-import {authorizationAPI} from "../../api/usersAPI/UsersAPI";
-import {stopSubmit} from "redux-form";
+import {stopSubmit} from 'redux-form';
+
+import {authorizationAPI, StatusCodeEnum} from '../../api/usersAPI/UsersAPI';
+import {number} from "prop-types";
 
 const SET_AUTH_DATA = 'social_network/auth/SET-AUTH-DATA';
 
-let initialState = {
-    id: null as number | null,
-    email: null as string | null,
-    login: null as string | null,
-    isAuth: false
-}
+const initialState = {
+  id: null as number | null,
+  email: null as string | null,
+  login: null as string | null,
+  isAuth: false,
+  photoAuth: null as string | null
+};
 
 export type InitialStateType = typeof initialState;
 
-
-const authReducer = (state = initialState, action): InitialStateType => {
-    switch (action.type) {
-        case SET_AUTH_DATA:
-            return {
-                ...state,
-                ...action.payload,
-            }
-        default:
-            return state;
-    }
-}
+const authReducer = (state = initialState, action: SetAuthUserDataActionType): InitialStateType => {
+  switch (action.type) {
+  case SET_AUTH_DATA:
+    return {
+      ...state,
+      ...action.payload,
+    };
+  default:
+    return state;
+  }
+};
 
 type setAuthUserDataActionPayloadType = {
-    id: number
-    email: string
-    login: string
-    isAuth: boolean
+  id: number
+  email: string
+  login: string
+  isAuth: boolean
+  photoAuth: string
 }
 
-type setAuthUserDataActionType = {
+export type SetAuthUserDataActionType = {
     type: typeof SET_AUTH_DATA,
     payload: setAuthUserDataActionPayloadType
 }
 
-export const setAuthUserData = (id, email, login, isAuth): setAuthUserDataActionType => ({
-    type: SET_AUTH_DATA,
-    payload: {id, email, login, isAuth}
-})
+export const setAuthUserData = (id: number, email: string,
+                                login: string, isAuth: boolean,
+                                photoAuth: string): SetAuthUserDataActionType => ({
+  type: SET_AUTH_DATA,
+  payload: {id, email, login, isAuth, photoAuth}
+});
 
 export const getAuthorization = () => async (dispatch) => {
-    let responce = await authorizationAPI.authorization();
-    if (responce.data.resultCode === 0) {
-        let {id, email, login} = responce.data.data;
-        dispatch(setAuthUserData(id, email, login, true));
-    }
-}
+  const data = await authorizationAPI.authorization();
+  if (data.resultCode === StatusCodeEnum.success) {
+    const {id, email, login} = data.data;
+    const dataFromProfile = await authorizationAPI.getPhotoAuth(id);
+    const photoAuth = dataFromProfile.photos.small
+    dispatch(setAuthUserData(id, email, login, true, photoAuth));
+  }
+};
 
 export const login = (email, password, rememberMe) => async (dispatch) => {
-    let responce = await authorizationAPI.login(email, password, rememberMe);
-    if (responce.data.resultCode === 0) {
-        dispatch(getAuthorization());
-    } else {
-        let message = responce.data.messages.length > 0 ? responce.data.messages[0] : "Some error"
-        dispatch(stopSubmit("login", {_error: message}))
-    }
-}
+  const data = await authorizationAPI.login(email, password, rememberMe);
+  if (data.resultCode === StatusCodeEnum.success) {
+    dispatch(getAuthorization());
+  } else {
+    const message = data.messages.length > 0 ? data.messages[0] : 'Some error';
+    dispatch(stopSubmit('login', {_error: message}));
+  }
+};
 
 export const logout = () => async (dispatch) => {
-    let responce = await authorizationAPI.logout();
-    if (responce.data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false))
-    }
-}
+  const data = await authorizationAPI.logout();
+  if (data.resultCode === StatusCodeEnum.success) {
+    dispatch(setAuthUserData(null, null, null, false, null));
+  }
+};
 
 export default authReducer;

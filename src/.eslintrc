@@ -1,0 +1,43 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "rules": {
+    "no-console": "warn", //не должно быть в итоговом коде console.log
+    "quotes": [ //кавычки в JS
+      "warn",
+      "single"
+    ],
+    "jsx-quotes": [ //кавычки в JSX
+      "warn",
+      "prefer-double"
+    ],
+    "prefer-const": "warn", //предпочитаемы константты 
+    "indent": [ //отступы в два пробела
+      "warn",
+      2
+    ],
+    "semi": [ //обязательные точки с запятой в конце строки
+      "warn",
+      "always"
+    ],
+    "import/order": [ //устанавливает порядок импортов
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "unknown",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always-and-inside-groups" //устанавливает отступ между импортами из файлов и из модулей
+      }
+    ]
+  }
+}
